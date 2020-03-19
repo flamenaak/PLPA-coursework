@@ -1,5 +1,7 @@
 package GUI_Model;
 
+import model.DrawingEngine;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -12,9 +14,11 @@ public class GUI extends JFrame {
     private JPanel _rightPanel;
     private JPanel _bottomPanel;
     private JFrame _mainFrame;
+    private CustomCanvas canvas;
 
 
     public GUI() {
+        this.canvas = new CustomCanvas();
         init();
     }
 
@@ -27,7 +31,7 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout(150,150));
 
         _canvasPanel = createPanel(550,400,Color.yellow);
-        _canvasPanel.add(new CustomCanvas());
+        _canvasPanel.add(canvas);
         _mainFrame.add(_canvasPanel,BorderLayout.WEST);
 
         _bottomPanel = createPanel(550,200,Color.green);
@@ -50,7 +54,18 @@ public class GUI extends JFrame {
         return panel;
     }
     public void showGUI(){
-
         _mainFrame.setVisible(true);//now frame will be visible, by default not visible
+    }
+
+    public CustomCanvas getCanvas() {
+        return canvas;
+    }
+
+    public void setEngine(DrawingEngine e){
+        this.canvas.setEngine(e);
+    }
+
+    public void repaintCanvas(){
+        canvas.repaint();
     }
 }
