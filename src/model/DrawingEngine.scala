@@ -1,9 +1,9 @@
 package model
 
-import java.awt.Graphics;
+import java.awt.{Canvas};
 
 class DrawingEngine(shapes: Array[Drawable]) {
-  def draw(g: Graphics): Unit ={
-    for(shape <- shapes) shape.draw(g);
+  def draw(canvas: Canvas): Unit ={
+    for(shape <- shapes) shape.draw(canvas);
   }
 }

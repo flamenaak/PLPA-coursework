@@ -3,7 +3,11 @@ package model
 import java.awt.{Canvas, Color, Graphics}
 
 class Line(point1: Point, point2: Point, color: Color) extends Drawable(color) {
-  def draw(g: Graphics) {
+  def this(p1: Point, p2: Point) {
+    this(p1, p2, Color.BLACK)
+  }
+
+  def draw(canvas: Canvas): Unit = {
     val x0 = point1.x
     val x1 = point2.x
     val y0 = point1.y
@@ -38,7 +42,7 @@ class Line(point1: Point, point2: Point, color: Color) extends Drawable(color) {
 
     for ((x, y) <- it) {
       val p = new Point(x, y, color)
-      p.draw(g)
+      p.draw(canvas)
     }
   }
 }

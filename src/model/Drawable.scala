@@ -1,6 +1,6 @@
 package model
-import java.awt.{Color, Graphics}
+import java.awt.{Canvas, Color, Graphics}
 
 abstract class Drawable(color: Color) {
-  def draw(g: Graphics)
+  def draw(canvas: Canvas): Unit
 }
