@@ -13,5 +13,8 @@ class Point(var x: Int, var y: Int, color: Color) extends Drawable(color) {
     y = canvas.getHeight() - y
     g.setColor(color)
     g.drawLine(x, y, x, y);
+
+
+
   }
 }
