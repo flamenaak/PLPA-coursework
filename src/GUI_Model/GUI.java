@@ -10,62 +10,93 @@ import java.awt.event.WindowEvent;
 public class GUI extends JFrame {
 
 
-    private JPanel _canvasPanel;
-    private JPanel _rightPanel;
-    private JPanel _bottomPanel;
+    private JPanel _mainPanel;
     private JFrame _mainFrame;
-    private CustomCanvas canvas;
+    private CustomTextArea _rightTextArea;
+    private CustomTextArea _bottomTextArea;
+    private CustomCanvas _canvas;
 
 
     public GUI() {
-        this.canvas = new CustomCanvas();
+
         init();
     }
 
-    private void init(){
+    private void init() {
         _mainFrame = new JFrame();
         _mainFrame.setSize(800, 600);//frame size 300 width and 300 height
-
         _mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        _mainFrame.setLayout(new BoxLayout(_mainFrame.getContentPane(), BoxLayout.Y_AXIS));
 
-        setLayout(new BorderLayout(150,150));
+        _mainPanel = new JPanel(new GridBagLayout());
 
-        _canvasPanel = createPanel(550,400,Color.yellow);
-        _canvasPanel.add(canvas);
-        _mainFrame.add(_canvasPanel,BorderLayout.WEST);
+        _rightTextArea = createJTextArea(1, 0, 1, 2,Color.cyan);
+        _mainPanel.add(_rightTextArea.get_area(),_rightTextArea.get_cts());
 
-        _bottomPanel = createPanel(550,200,Color.green);
-        _mainFrame.add(_bottomPanel,BorderLayout.SOUTH);
+        _canvas = createCanvas(0, 0, 1, 1, 400, 400); //canvas
+        _canvas.setBackground(Color.WHITE);
 
-        _rightPanel = createPanel(250,600, Color.CYAN);
-        _mainFrame.add(_rightPanel,BorderLayout.EAST);
+        _mainPanel.add(_canvas, _canvas.get_cts());
 
-        setLocationRelativeTo(null);
+        _bottomTextArea = createJTextArea(0, 1, 1, 1,Color.yellow);
+        _bottomTextArea.get_area().setEditable(false);
+        _mainPanel.add(_bottomTextArea.get_area(),_bottomTextArea.get_cts());
+
+        _mainFrame.add(_mainPanel);
+        _mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
     }
 
-    public JPanel createPanel(int width, int height, Color c){
-        JPanel panel = new JPanel();
-        panel.setBackground(c);
-        panel.setLayout(new GridLayout());
-        panel.setMinimumSize(new Dimension(width, height));
-        panel.setMaximumSize(new Dimension(width, height));
-        panel.setPreferredSize(new Dimension(width, height));
+    private CustomCanvas createCanvas(int x, int y, int w, int h, int componentWidth, int componentHeight) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = w;
+        gbc.gridheight = h;
+        gbc.weightx = .1;
+        gbc.weighty = .1;
+        gbc.fill = GridBagConstraints.BOTH;
+        CustomCanvas c = new CustomCanvas(gbc);
+        c.setMinimumSize(new Dimension(componentWidth, componentHeight));
+        c.setMaximumSize(new Dimension(componentWidth, componentHeight));
+        c.setPreferredSize(new Dimension(componentWidth, componentHeight));
 
-        return panel;
+        return c;
     }
+
+    private CustomTextArea createJTextArea(int x, int y, int w, int h,Color c){
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = w;
+        gbc.gridheight = h;
+        gbc.weightx = .1;
+        gbc.weighty = .1;
+        gbc.fill = GridBagConstraints.BOTH;
+        JTextArea a = new JTextArea();
+        a.setSize(new Dimension(230,580));
+        a.setMinimumSize(new Dimension(230, 580));
+        a.setMaximumSize(new Dimension(230, 580));
+        a.setPreferredSize(new Dimension(230, 580));
+        a.setBackground(c);
+        a.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        a.setLineWrap(true);
+
+        return new CustomTextArea(a,gbc);
+    }
+
     public void showGUI(){
         _mainFrame.setVisible(true);//now frame will be visible, by default not visible
     }
 
     public CustomCanvas getCanvas() {
-        return canvas;
+        return _canvas;
     }
 
     public void setEngine(DrawingEngine e){
-        this.canvas.setEngine(e);
+        this._canvas.setEngine(e);
     }
 
     public void repaintCanvas(){
-        canvas.repaint();
+        _canvas.repaint();
     }
 }

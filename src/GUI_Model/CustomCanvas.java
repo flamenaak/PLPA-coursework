@@ -10,10 +10,18 @@ import java.awt.*;
 public class CustomCanvas extends Canvas {
     private DrawingEngine engine;
 
-    public CustomCanvas(){
-        setBackground(Color.WHITE);
-        setSize(450,500);
+    private GridBagConstraints _cts;
 
+    public CustomCanvas(GridBagConstraints cts){
+        this._cts = cts;
+    }
+
+    public GridBagConstraints get_cts() {
+        return _cts;
+    }
+
+    public void set_cts(GridBagConstraints _cts) {
+        this._cts = _cts;
     }
 
     public void paint(Graphics g)
