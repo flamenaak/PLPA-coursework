@@ -30,17 +30,17 @@ public class GUI extends JFrame {
 
         _mainPanel = new JPanel(new GridBagLayout());
 
-        _rightTextArea = createJTextArea(1, 0, 1, 2,Color.cyan);
-        _mainPanel.add(_rightTextArea.get_area(),_rightTextArea.get_cts());
+        _rightTextArea = createJTextArea(1, 0, 1, 2, Color.cyan);
+        _mainPanel.add(_rightTextArea.get_area(), _rightTextArea.get_cts());
 
         _canvas = createCanvas(0, 0, 1, 1, 400, 400); //canvas
         _canvas.setBackground(Color.WHITE);
 
         _mainPanel.add(_canvas, _canvas.get_cts());
 
-        _bottomTextArea = createJTextArea(0, 1, 1, 1,Color.yellow);
+        _bottomTextArea = createJTextArea(0, 1, 1, 1, Color.yellow);
         _bottomTextArea.get_area().setEditable(false);
-        _mainPanel.add(_bottomTextArea.get_area(),_bottomTextArea.get_cts());
+        _mainPanel.add(_bottomTextArea.get_area(), _bottomTextArea.get_cts());
 
         _mainFrame.add(_mainPanel);
         _mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -63,7 +63,7 @@ public class GUI extends JFrame {
         return c;
     }
 
-    private CustomTextArea createJTextArea(int x, int y, int w, int h,Color c){
+    private CustomTextArea createJTextArea(int x, int y, int w, int h, Color c) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
@@ -73,7 +73,7 @@ public class GUI extends JFrame {
         gbc.weighty = .1;
         gbc.fill = GridBagConstraints.BOTH;
         JTextArea a = new JTextArea();
-        a.setSize(new Dimension(230,580));
+        a.setSize(new Dimension(230, 580));
         a.setMinimumSize(new Dimension(230, 580));
         a.setMaximumSize(new Dimension(230, 580));
         a.setPreferredSize(new Dimension(230, 580));
@@ -81,10 +81,10 @@ public class GUI extends JFrame {
         a.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         a.setLineWrap(true);
 
-        return new CustomTextArea(a,gbc);
+        return new CustomTextArea(a, gbc);
     }
 
-    public void showGUI(){
+    public void showGUI() {
         _mainFrame.setVisible(true);//now frame will be visible, by default not visible
     }
 
@@ -92,11 +92,15 @@ public class GUI extends JFrame {
         return _canvas;
     }
 
-    public void setEngine(DrawingEngine e){
+    public void setEngine(DrawingEngine e) {
         this._canvas.setEngine(e);
     }
 
-    public void repaintCanvas(){
+    public void repaintCanvas() {
         _canvas.repaint();
+    }
+
+    public CustomTextArea getTextArea() {
+        return _rightTextArea;
     }
 }
