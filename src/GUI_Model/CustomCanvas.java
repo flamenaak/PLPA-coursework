@@ -26,19 +26,7 @@ public class CustomCanvas extends Canvas {
 
     public void paint(Graphics g)
     {
-        Point p = new Point(60,60);
-        Point p2 = new Point(80,80);
-        Point p3 = new Point(100,60);
-        Point p4 = new Point(120,80);
-        Line l = new Line(p,p2, Color.green);
-        Line l2 = new Line(p2, p3, Color.black);
-        Line l3 = new Line(p3,p4, Color.red);
-
-        l.draw(this);
-        l2.draw(this);
-        l3.draw(this);
-
-//        engine.draw(getGraphics());
+        engine.draw(this);
     }
 
     public void setEngine(DrawingEngine e){

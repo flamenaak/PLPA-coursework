@@ -2,7 +2,7 @@ package model
 
 import java.awt.{Canvas, Color, Graphics}
 
-class Line(point1: Point, point2: Point, color: Color) extends Drawable(color) {
+case class Line(point1: Point, point2: Point, color: Color) extends Drawable(color) {
   def this(p1: Point, p2: Point) {
     this(p1, p2, Color.BLACK)
   }
