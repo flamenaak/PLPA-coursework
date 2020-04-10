@@ -3,6 +3,7 @@ package Controller;
 import GUI_Model.GUI;
 import model.*;
 import model.Point;
+import model.Rectangle;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -64,7 +65,11 @@ public class Controller {
         Line l2 = new Line(p2, p3, Color.black);
         Line l3 = new Line(p3, p4, Color.red);
 
-        Drawable[] arr = {l, l3, l2};
+        Circle c = new Circle(p, 5, Color.BLUE);
+        Rectangle r = new Rectangle(p2, p3, Color.magenta);
+        Text t = new Text(p4, "Test string", Color.cyan, 1);
+
+        Drawable[] arr = {l, l3, l2, c ,r, t};
         gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray)));
     }
 }

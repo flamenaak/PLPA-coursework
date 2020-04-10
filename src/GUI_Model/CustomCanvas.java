@@ -1,9 +1,6 @@
 package GUI_Model;
 
-import model.Drawable;
 import model.DrawingEngine;
-import model.Line;
-import model.Point;
 
 import java.awt.*;
 
