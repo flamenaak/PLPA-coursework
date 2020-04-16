@@ -129,17 +129,17 @@ class Parser(_input:String){
                   case c if c.startsWith(RECTANGLE) => {
                     var parsed_rect_drawable = parse_rect(c).setColor(getColorByName(color))
 
-                    var parsed_rect_command : FillCommand = new FillCommand(parsed_rect_drawable.asInstanceOf[FillAble])
+                    var parsed_rect_command : FillCommand = new FillCommand(parsed_rect_drawable.asInstanceOf[Fillable])
                     parsed_commands = parsed_commands :+ parsed_rect_command
                   }
                   case c if c.startsWith(CIRCLE) => {
                     var parsed_circle_drawable = parse_circle(c).setColor(getColorByName(color))
-                    var parsed_circle_command : FillCommand = new FillCommand(parsed_circle_drawable.asInstanceOf[FillAble])
+                    var parsed_circle_command : FillCommand = new FillCommand(parsed_circle_drawable.asInstanceOf[Fillable])
                     parsed_commands = parsed_commands :+ parsed_circle_command
                   }
                   case c if c.startsWith(BOUNDING_BOX) => {
                     var parsed_text_drawable = parse_text(c).setColor(getColorByName(color))
-                    var parsed_b_box_command : FillCommand = new FillCommand(parsed_text_drawable.asInstanceOf[FillAble])
+                    var parsed_b_box_command : FillCommand = new FillCommand(parsed_text_drawable.asInstanceOf[Fillable])
                     parsed_commands = parsed_commands :+ parsed_b_box_command
                   }
                   case c if c.startsWith(TEXT) => {

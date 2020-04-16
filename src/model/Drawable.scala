@@ -1,8 +1,7 @@
 package model
 import java.awt.{Canvas, Color}
 
-trait FillAble  {
- // var color : Color
+abstract class Fillable(color: Color) extends Drawable(color) {
   def fill(canvas : Canvas) : Unit
 }
 

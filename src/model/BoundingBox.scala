@@ -1,6 +1,6 @@
 package model
 import java.awt.{Canvas, Color}
-case class BoundingBox (point_1: Point, point_3: Point, var color: Color ) extends Drawable(color)with FillAble   {
+case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends Fillable(color) {
 
   def this(point1: Point, point2: Point) = {
     this(point1, point2, Color.BLACK)

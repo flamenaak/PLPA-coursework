@@ -7,7 +7,6 @@ import model.Rectangle;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class Controller {
     private GUI gui;
@@ -24,7 +23,8 @@ public class Controller {
                     _parser = new Parser(gui.getTextArea().get_area().getText());
                    Command[] parsed =  _parser.parse();
                    System.out.println(parsed.length);
-                    //gui.setEngine(new DrawingEngine());
+                    gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray)));
+                    gui.repaintCanvas();
                 }
             }
 
@@ -44,21 +44,7 @@ public class Controller {
             }
         });
 
-        initTest();
-
         gui.showGUI();
-    }
-
-    public Drawable[] parse(String s) {
-        /*
-         * Parser.parse(s);
-         */
-        return new Drawable[0];
-    }
-
-    public void draw() {
-        //gui.setEngine(new DrawingEngine(parse(gui.getTextField().getText())));
-        gui.repaintCanvas();
     }
 
     public void initTest() {
@@ -77,6 +63,6 @@ public class Controller {
 
         Drawable[] arr = {l, l3, l2, c ,r, t};
 
-        gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray)));
+        //gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray)));
     }
 }

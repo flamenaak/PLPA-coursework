@@ -2,7 +2,7 @@ package model
 
 import java.awt.{Canvas, Color}
 
-case class Circle (var point: Point, var radius: Int, color: Color) extends Drawable(color)  with FillAble {
+case class Circle (var point: Point, var radius: Int, color: Color) extends Fillable(color) {
   def this(point: Point, radius: Int) {
     this(point, radius, Color.BLACK);
   }
@@ -52,7 +52,7 @@ case class Circle (var point: Point, var radius: Int, color: Color) extends Draw
   }
 
   override def fill(canvas: Canvas): Unit = {
-    //TODO fill functionality
+    canvas.getGraphics.fillOval(point.x + radius, point.y + radius, radius*2, radius*2);
   }
 
   override def setColor(c: Color): Drawable = {

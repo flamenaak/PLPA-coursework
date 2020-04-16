@@ -1,6 +1,7 @@
 package GUI_Model;
 
 import model.DrawingEngine;
+import model.Plane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +56,7 @@ public class GUI extends JFrame {
         gbc.weightx = .1;
         gbc.weighty = .1;
         gbc.fill = GridBagConstraints.BOTH;
-        CustomCanvas c = new CustomCanvas(gbc);
+        CustomCanvas c = new CustomCanvas(gbc,new Plane(20, Color.lightGray));
         c.setMinimumSize(new Dimension(componentWidth, componentHeight));
         c.setMaximumSize(new Dimension(componentWidth, componentHeight));
         c.setPreferredSize(new Dimension(componentWidth, componentHeight));
