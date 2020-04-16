@@ -18,4 +18,14 @@ case class Text(point: Point, text: String, color: Color, size: Int) extends Dra
     g.setFont(g.getFont().deriveFont(size.asInstanceOf[Float]))
     g.drawString(text, point.x, canvas.getHeight() - point.y)
   }
+
+  override def printType(): Unit = {println(this.getClass())}
+
+  override def toString: String = {
+    return point.toString() + "\n" + "Text -> " + text + "\n" + "Text color -> " + color
+  }
+
+  override def setColor(c: Color): Drawable = {
+    return new Text(point,text,c)
+  }
 }

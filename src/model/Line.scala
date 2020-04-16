@@ -44,5 +44,17 @@ case class Line(point1: Point, point2: Point, color: Color) extends Drawable(col
       val p = new Point(x, y, color)
       p.draw(canvas)
     }
+
+
+  }
+
+  override def printType(): Unit = {println(this.getClass())}
+
+  override def toString: String = {
+    return point1.toString() + "\n" + point2.toString() + "\n" + "Line color -> " + color
+  }
+
+  override def setColor(c: Color): Drawable = {
+    return new Line(point1,point2,c)
   }
 }

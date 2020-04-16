@@ -1,25 +1,30 @@
 package Controller;
-
+import parser.*;
 import GUI_Model.GUI;
 import model.*;
 import model.Point;
 import model.Rectangle;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Controller {
     private GUI gui;
     private boolean shift;
+    private Parser _parser;
 
     public Controller() {
         gui = new GUI();
+
         gui.getTextArea().get_area().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if ((int) e.getKeyChar() == 10 && shift) {
-                    System.out.println("parse and draw");
+                    _parser = new Parser(gui.getTextArea().get_area().getText());
+                   Command[] parsed =  _parser.parse();
+                   System.out.println(parsed.length);
+                    //gui.setEngine(new DrawingEngine());
                 }
             }
 
@@ -69,7 +74,9 @@ public class Controller {
         Rectangle r = new Rectangle(p2, p3, Color.magenta);
         Text t = new Text(p4, "Test string", Color.cyan, 1);
 
+
         Drawable[] arr = {l, l3, l2, c ,r, t};
+
         gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray)));
     }
 }

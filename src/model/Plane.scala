@@ -31,4 +31,17 @@ class Plane(unitSize: Int, color: Color) extends Drawable(color = Color.lightGra
   override def draw(canvas: Canvas): Unit = {
     drawCartesian(canvas)
   }
+
+
+  override def printType(): Unit = {
+    println(this.getClass())
+  }
+
+  override def toString: String = {
+    return "Plane"
+  }
+
+  override def setColor(c: Color): Drawable = {
+    return new Plane(unitSize,c)
+  }
 }

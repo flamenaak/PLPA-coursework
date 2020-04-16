@@ -15,4 +15,14 @@ case class Point(var x: Int, var y: Int, color: Color) extends Drawable(color) {
     g.setColor(color)
     g.drawLine(x, y, x, y);
   }
+
+  override def printType(): Unit = {println(this.getClass())}
+
+  override def toString(): String = {
+    return "x -> " + x + "\n" + "y ->" + y + "\n" + "Color -> " + color
+  }
+
+  override def setColor(c: Color): Drawable = {
+    return new Point(x,y,c)
+  }
 }

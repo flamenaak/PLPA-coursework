@@ -2,7 +2,7 @@ package model
 
 import java.awt.{Canvas, Color}
 
-case class Rectangle (point_1: Point, point_3: Point, var color: Color ) extends Drawable(color) {
+case class Rectangle (point_1: Point, point_3: Point, var color: Color ) extends Drawable(color) with FillAble {
   def this(point1: Point, point2: Point) = {
     this(point1, point2, Color.BLACK)
   }
@@ -21,4 +21,14 @@ case class Rectangle (point_1: Point, point_3: Point, var color: Color ) extends
     line.draw(canvas);
   }
 
+  override def printType(): Unit = {println(this.getClass)}
+
+
+  override def fill(canvas: Canvas): Unit = {
+     //todo fill functionality
+  }
+
+  override def setColor(c: Color): Drawable = {
+    return new Rectangle(point_1,point_3,c)
+  }
 }
