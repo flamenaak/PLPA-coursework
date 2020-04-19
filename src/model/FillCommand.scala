@@ -7,4 +7,11 @@ class FillCommand(fillable:Fillable) extends Command {
   override def execute(canvas: Canvas, plane: Plane, g: Graphics): Unit = {
     plane.transform(fillable).asInstanceOf[Fillable].fill(canvas, g)
   }
+
+  def getFillable : Fillable = {
+    return fillable
+  }
+
+  override def getObj(): FillCommand = this
+
 }

@@ -26,4 +26,5 @@ case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends F
     return new BoundingBox(point_1,point_3,c)
   }
 
+  override def getSelf(): Drawable = this
 }

@@ -101,7 +101,11 @@ public class GUI extends JFrame {
         _canvas.repaint();
     }
 
-    public CustomTextArea getTextArea() {
+    public CustomTextArea getInputTextArea() {
         return _rightTextArea;
     }
+
+    public CustomTextArea getErrorTextArea() { return _bottomTextArea;}
+
+    public void clearErrors() {_bottomTextArea.get_area().setText("");}
 }

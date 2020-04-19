@@ -32,4 +32,7 @@ case class Rectangle (point_1: Point, point_3: Point, var color: Color ) extends
   override def setColor(c: Color): Drawable = {
     return new Rectangle(point_1,point_3,c)
   }
+
+  override def getSelf(): Drawable = this
+
 }

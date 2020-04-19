@@ -20,7 +20,7 @@ class DrawingEngine(shapes: Array[Command], plane: Plane, boundingBox: BoundingB
       if (leftMost.y > rightMost.y){
         leftMost.y = rightMost.y
       }
-      g.setClip(leftMost.x, canvas.getHeight - leftMost.y - height, width, height)
+      g.setClip(leftMost.x-1, canvas.getHeight - leftMost.y - height -1, width + 2, height + 2)
     }
     for(shape <- shapes) shape.execute(canvas, plane, g);
   }

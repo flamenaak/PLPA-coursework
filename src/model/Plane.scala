@@ -49,4 +49,7 @@ class Plane(unitSize: Int, color: Color) extends Drawable(color = Color.lightGra
   override def setColor(c: Color): Drawable = {
     return new Plane(unitSize,c)
   }
+
+  override def getSelf(): Drawable = this
+
 }

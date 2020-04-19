@@ -10,4 +10,9 @@ class DrawCommand(drawable: Drawable) extends Command {
     plane.transform(drawable).draw(canvas, g)
   }
 
+  def getDrawable: Drawable ={
+    return drawable
+  }
+
+  override def getObj(): DrawCommand = this
 }

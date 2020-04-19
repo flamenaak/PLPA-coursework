@@ -27,4 +27,7 @@ case class Text(point: Point, text: String, color: Color, size: Int) extends Dra
   override def setColor(c: Color): Drawable = {
     return new Text(point,text,c)
   }
+
+  override def getSelf(): Drawable = this
+
 }

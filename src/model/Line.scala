@@ -57,4 +57,7 @@ case class Line(point1: Point, point2: Point, color: Color) extends Drawable(col
   override def setColor(c: Color): Drawable = {
     return new Line(point1,point2,c)
   }
+
+  override def getSelf(): Drawable = this
+
 }
