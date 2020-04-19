@@ -7,9 +7,8 @@ case class Point(var x: Int, var y: Int, color: Color) extends Drawable(color) {
     this(x, y, Color.BLACK)
   }
 
-  def draw(canvas: Canvas): Unit = {
+  def draw(canvas: Canvas, g: Graphics): Unit = {
     // canvas return always new Graphics so we need to store it
-    val g = canvas.getGraphics()
     // this is to move 0,0 to bottom left, instead of top left which is canvas default
     y = canvas.getHeight() - y
     g.setColor(color)

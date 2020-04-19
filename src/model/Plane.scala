@@ -11,12 +11,12 @@ class Plane(unitSize: Int, color: Color) extends Drawable(color = Color.lightGra
 
     for (i <- 0 to rows) {
       val l = new Line(new Point(0, unitSize * i), new Point(canvasSize._1, unitSize * i), color)
-      l.draw(canvas);
+      l.draw(canvas, canvas.getGraphics);
     }
 
     for (i <- 0 to cols) {
       val l = new Line(new Point(unitSize * i, 0), new Point(unitSize * i, canvasSize._2), color)
-      l.draw(canvas)
+      l.draw(canvas, canvas.getGraphics)
     }
   }
 
@@ -26,9 +26,14 @@ class Plane(unitSize: Int, color: Color) extends Drawable(color = Color.lightGra
     case Circle(point, radius, color) => new Circle(transform(point).asInstanceOf[Point], radius * unitSize, color)
     case Rectangle(point_1, point_3, color) => new Rectangle(transform(point_1).asInstanceOf[Point], transform(point_3).asInstanceOf[Point], color)
     case Text(point, string, color, size) => new Text(transform(point).asInstanceOf[Point], string, color, unitSize)
+    case BoundingBox(point_1, point_3, color) => new BoundingBox(transform(point_1).asInstanceOf[Point], transform(point_3).asInstanceOf[Point], color)
   }
 
-  override def draw(canvas: Canvas): Unit = {
+  def draw(canvas: Canvas): Unit = {
+    drawCartesian(canvas)
+  }
+
+  override def draw(canvas: Canvas, g: Graphics): Unit = {
     drawCartesian(canvas)
   }
 

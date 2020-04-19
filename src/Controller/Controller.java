@@ -1,9 +1,11 @@
 package Controller;
+
 import parser.*;
 import GUI_Model.GUI;
 import model.*;
 import model.Point;
 import model.Rectangle;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,9 +23,9 @@ public class Controller {
             public void keyTyped(KeyEvent e) {
                 if ((int) e.getKeyChar() == 10 && shift) {
                     _parser = new Parser(gui.getTextArea().get_area().getText());
-                   Command[] parsed =  _parser.parse();
-                   System.out.println(parsed.length);
-                    gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray)));
+                    Command[] parsed = _parser.parse();
+                    System.out.println(parsed.length);
+                    gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray), null));
                     gui.repaintCanvas();
                 }
             }
@@ -43,7 +45,7 @@ public class Controller {
                 }
             }
         });
-
+        initTest();
         gui.showGUI();
     }
 
@@ -60,9 +62,13 @@ public class Controller {
         Rectangle r = new Rectangle(p2, p3, Color.magenta);
         Text t = new Text(p4, "Test string", Color.cyan, 1);
 
+        Point bp = new Point(1, 1);
+        Point bp2 = new Point(9, 9);
+        Circle c2 = new Circle(new Point(10,10), 3, Color.ORANGE);
 
-        Drawable[] arr = {l, l3, l2, c ,r, t};
+        Command[] arr = {new DrawCommand(l), new DrawCommand(l3), new DrawCommand(l2), new DrawCommand(c), new DrawCommand(r), new DrawCommand(t), new FillCommand(c2)};
 
-        //gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray)));
+        BoundingBox bb = new BoundingBox(bp, bp2);
+        gui.setEngine(new DrawingEngine(arr, new Plane(20, Color.lightGray), bb));
     }
 }

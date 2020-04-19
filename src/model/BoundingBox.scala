@@ -1,12 +1,12 @@
 package model
-import java.awt.{Canvas, Color}
+import java.awt.{Canvas, Color, Graphics}
 case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends Fillable(color) {
 
-  def this(point1: Point, point2: Point) = {
-    this(point1, point2, Color.BLACK)
+  def this(point_1: Point, point_3: Point) = {
+    this(point_1, point_3, Color.BLACK)
   }
 
-  override def draw(canvas: Canvas): Unit = {
+  override def draw(canvas: Canvas, g: Graphics): Unit = {
 
     //todo
   }
@@ -17,7 +17,7 @@ case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends F
     return point_1.toString() + "\n" + point_3.toString() + "\n" + "B-Box color -> " + color
   }
 
-  override def fill(canvas: Canvas): Unit = {
+  override def fill(canvas: Canvas, g: Graphics): Unit = {
     //TODO fill functionality
 
   }

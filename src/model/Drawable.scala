@@ -1,12 +1,12 @@
 package model
-import java.awt.{Canvas, Color}
+import java.awt.{Canvas, Color, Graphics}
 
 abstract class Fillable(color: Color) extends Drawable(color) {
-  def fill(canvas : Canvas) : Unit
+  def fill(canvas : Canvas, g: Graphics) : Unit
 }
 
 abstract class Drawable(color: Color)  {
-  def draw(canvas: Canvas): Unit
+  def draw(canvas: Canvas, g: Graphics): Unit
 
   def printType() : Unit
 

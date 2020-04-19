@@ -1,6 +1,6 @@
 package model
 
-import java.awt.{Canvas, Color, Font}
+import java.awt.{Canvas, Color, Font, Graphics}
 
 case class Text(point: Point, text: String, color: Color, size: Int) extends Drawable(color) {
   def this(point: Point, text: String) = {
@@ -11,8 +11,7 @@ case class Text(point: Point, text: String, color: Color, size: Int) extends Dra
     this(point, text, color, 1);
   }
 
-  override def draw(canvas: Canvas): Unit = {
-    val g = canvas.getGraphics()
+  override def draw(canvas: Canvas, g: Graphics): Unit = {
     // canvas.getHeight() - point.y is to move 0,0 to bottom left, instead of top left which is canvas default
     g.setColor(color)
     g.setFont(g.getFont().deriveFont(size.asInstanceOf[Float]))

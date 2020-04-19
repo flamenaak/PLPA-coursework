@@ -7,7 +7,7 @@ case class Line(point1: Point, point2: Point, color: Color) extends Drawable(col
     this(p1, p2, Color.BLACK)
   }
 
-  def draw(canvas: Canvas): Unit = {
+  def draw(canvas: Canvas, g: Graphics): Unit = {
     val x0 = point1.x
     val x1 = point2.x
     val y0 = point1.y
@@ -42,7 +42,7 @@ case class Line(point1: Point, point2: Point, color: Color) extends Drawable(col
 
     for ((x, y) <- it) {
       val p = new Point(x, y, color)
-      p.draw(canvas)
+      p.draw(canvas, g)
     }
 
 
