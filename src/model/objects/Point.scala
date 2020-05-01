@@ -1,4 +1,4 @@
-package model
+package model.objects
 
 import java.awt.{Canvas, Color, Graphics}
 
@@ -24,6 +24,4 @@ case class Point(var x: Int, var y: Int, color: Color) extends Drawable(color) {
   override def setColor(c: Color): Drawable = {
     return new Point(x,y,c)
   }
-
-  override def getSelf(): Drawable = this
 }

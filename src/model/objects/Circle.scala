@@ -1,4 +1,4 @@
-package model
+package model.objects
 
 import java.awt.{Canvas, Color, Graphics}
 
@@ -61,7 +61,4 @@ case class Circle (var point: Point, var radius: Int, color: Color) extends Fill
   override def setColor(c: Color): Drawable = {
     return new Circle(point,radius,c)
   }
-
-  override def getSelf(): Drawable = this
-
 }

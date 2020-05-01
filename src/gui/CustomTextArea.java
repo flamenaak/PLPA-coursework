@@ -1,4 +1,4 @@
-package GUI_Model;
+package gui;
 
 
 import javax.swing.*;

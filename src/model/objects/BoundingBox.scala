@@ -1,5 +1,7 @@
-package model
+package model.objects
+
 import java.awt.{Canvas, Color, Graphics}
+
 case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends Fillable(color) {
 
   def this(point_1: Point, point_3: Point) = {
@@ -7,8 +9,7 @@ case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends F
   }
 
   override def draw(canvas: Canvas, g: Graphics): Unit = {
-
-    //todo
+    Rectangle(point_1, point_3, color).draw(canvas, g)
   }
 
   override def printType(): Unit = {println(this.getClass())}
@@ -18,13 +19,10 @@ case class BoundingBox (point_1: Point, point_3: Point, color: Color ) extends F
   }
 
   override def fill(canvas: Canvas, g: Graphics): Unit = {
-    //TODO fill functionality
-
+    Rectangle(point_1, point_3, color).draw(canvas, g)
   }
 
   override def setColor(c: Color): Drawable = {
     return new BoundingBox(point_1,point_3,c)
   }
-
-  override def getSelf(): Drawable = this
 }

@@ -1,6 +1,9 @@
 package model
 
-import java.awt.{Canvas, Graphics};
+import java.awt.{Canvas, Graphics}
+
+import model.commands.Command
+import model.objects.{BoundingBox, Plane};
 
 class DrawingEngine(shapes: Array[Command], plane: Plane, boundingBox: BoundingBox) {
 

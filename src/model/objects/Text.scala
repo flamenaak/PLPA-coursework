@@ -1,6 +1,6 @@
-package model
+package model.objects
 
-import java.awt.{Canvas, Color, Font, Graphics}
+import java.awt.{Canvas, Color, Graphics}
 
 case class Text(point: Point, text: String, color: Color, size: Int) extends Drawable(color) {
   def this(point: Point, text: String) = {
@@ -27,7 +27,4 @@ case class Text(point: Point, text: String, color: Color, size: Int) extends Dra
   override def setColor(c: Color): Drawable = {
     return new Text(point,text,c)
   }
-
-  override def getSelf(): Drawable = this
-
 }

@@ -2,8 +2,10 @@ package parser
 
 import java.awt.Color
 
-import GUI_Model.CustomTextArea
+import gui.CustomTextArea
 import model._
+import model.commands.{Command, DrawCommand, FillCommand}
+import model.objects.{BoundingBox, Circle, Drawable, Fillable, Line, Point, Rectangle, Text}
 
 import util.control.Breaks._
 

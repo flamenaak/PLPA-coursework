@@ -1,6 +1,8 @@
-package model
+package model.commands
 
-import java.awt.{Canvas, Color, Graphics}
+import java.awt.{Canvas, Graphics}
+
+import model.objects.{Fillable, Plane}
 
 class FillCommand(fillable:Fillable) extends Command {
 
@@ -11,7 +13,4 @@ class FillCommand(fillable:Fillable) extends Command {
   def getFillable : Fillable = {
     return fillable
   }
-
-  override def getObj(): FillCommand = this
-
 }

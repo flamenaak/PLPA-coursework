@@ -1,8 +1,4 @@
-import Controller.Controller;
-import GUI_Model.*;
-
-import java.awt.*;
-import model.Point;
+import controller.Controller;
 
 public class Main {
     public static void main(String[] args) {

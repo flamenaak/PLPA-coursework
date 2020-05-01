@@ -1,4 +1,4 @@
-package model
+package model.objects
 
 import java.awt.{Canvas, Color, Graphics}
 
@@ -26,13 +26,13 @@ case class Rectangle (point_1: Point, point_3: Point, var color: Color ) extends
 
   override def fill(canvas: Canvas, g: Graphics): Unit = {
     g.setColor(color)
-     g.fillRect(point_1.x, canvas.getHeight - point_1.y, Math.abs(point_1.x- point_3.x), Math.abs(point_1.y - point_3.y));
+    val width = Math.abs(point_1.x - point_3.x)
+    val height = Math.abs(point_1.y - point_3.y)
+
+    g.fillRect(point_1.x, canvas.getHeight - point_1.y - height, width, height);
   }
 
   override def setColor(c: Color): Drawable = {
     return new Rectangle(point_1,point_3,c)
   }
-
-  override def getSelf(): Drawable = this
-
 }

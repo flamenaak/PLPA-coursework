@@ -1,4 +1,5 @@
-package model
+package model.objects
+
 import java.awt.{Canvas, Color, Graphics}
 
 
@@ -9,7 +10,5 @@ abstract class Drawable(color: Color)  {
   def printType() : Unit
 
   def setColor(c:Color) : Drawable
-
-  def getSelf() : Drawable
 
 }

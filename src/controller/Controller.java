@@ -1,10 +1,14 @@
-package Controller;
+package controller;
 
+import model.commands.Command;
+import model.commands.DrawCommand;
+import model.commands.FillCommand;
+import model.objects.*;
+import model.objects.Point;
+import model.objects.Rectangle;
 import parser.*;
-import GUI_Model.GUI;
+import gui.GUI;
 import model.*;
-import model.Point;
-import model.Rectangle;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,34 +19,28 @@ public class Controller {
     private GUI _gui;
     private boolean shift;
     private Parser _parser;
-    private BoundingBox _bbox;
 
     public Controller() {
         _gui = new GUI();
-        _bbox = null;
         _gui.getInputTextArea().get_area().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if ((int) e.getKeyChar() == 10 && shift) {
                     String input = _gui.getInputTextArea().get_area().getText();
-                    if(!input.equals("")){
+                    if (!input.equals("")) {
 
                         _gui.clearErrors();
 
                         _parser = new Parser(_gui.getInputTextArea().get_area().getText(), _gui.getErrorTextArea());
                         Command[] parsed = _parser.parse();
-                        checkForBBox(parsed);
+                        BoundingBox _bbox = getBBox(parsed);
                         if (hasMoreThanOneBBox(parsed)) {
                             _gui.getErrorTextArea().get_area().append("You cannot have more than 1 Bounding-Box.\n");
-                        } else if (_bbox != null) {
+                        } else {
                             _gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray), _bbox));
                             _gui.repaintCanvas();
-                        } else {
-                            _gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray), null));
-                            _gui.repaintCanvas();
                         }
-                    }
-                    else{
+                    } else {
                         _gui.getErrorTextArea().get_area().append("You are executing empty command.\n");
                     }
                 }
@@ -80,20 +78,20 @@ public class Controller {
         return b_box_command_count > 1;
     }
 
-    private void checkForBBox(Command[] parsed) {
+    private BoundingBox getBBox(Command[] parsed) {
         Command b_box = Arrays.stream(parsed).filter(command -> {
                     if (command instanceof DrawCommand) {
                         Drawable d = ((DrawCommand) command).getDrawable();
-                        if (d instanceof BoundingBox) {
-                            return true;
-                        }
+                        return (d instanceof BoundingBox);
                     }
                     return false;
                 }
         ).findAny().orElse(null);
         if (b_box != null) {
-            DrawCommand b_box1 = (DrawCommand) b_box.getObj();
-            _bbox = (BoundingBox) (b_box1.getDrawable().getSelf());
+            DrawCommand b_box1 = (DrawCommand) b_box;
+            return (BoundingBox) b_box1.getDrawable();
+        } else {
+            return null;
         }
     }
 

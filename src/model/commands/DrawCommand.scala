@@ -1,6 +1,8 @@
-package model
+package model.commands
 
-import java.awt.{Canvas, Color, Graphics}
+import java.awt.{Canvas, Graphics}
+
+import model.objects.{Drawable, Plane}
 
 
 class DrawCommand(drawable: Drawable) extends Command {
@@ -13,6 +15,4 @@ class DrawCommand(drawable: Drawable) extends Command {
   def getDrawable: Drawable ={
     return drawable
   }
-
-  override def getObj(): DrawCommand = this
 }
