@@ -101,7 +101,6 @@ class Parser(_input: String, errors: CustomTextArea) {
         return false
       }
     }
-
     return true
   }
 
@@ -123,7 +122,7 @@ class Parser(_input: String, errors: CustomTextArea) {
           if (current_object != " " && current_object != "") {
             var parsed_command: FillCommand = null
             current_object match {
-              case s if s.startsWith("(") => {
+              case s if s.matches("\\((.*?)\\)") && (i > 0) => {
                 val str = split_array(i).substring(1, split_array(i).length - 1)
                 str match {
                   case c if c.startsWith(RECTANGLE) => {
@@ -145,9 +144,13 @@ class Parser(_input: String, errors: CustomTextArea) {
                   }
                 }
               }
-              case s => {
+              case s if (i == 0) => {
                 //color
                 color = s
+              }
+              case _ => {
+                errors.get_area().append("Error -> Incorrect syntax.\n")
+                break
               }
             }
             if (parsed_command != null) {
@@ -168,7 +171,7 @@ class Parser(_input: String, errors: CustomTextArea) {
           var current_object = split_array(i)
           if (current_object != " " && current_object != "") {
             current_object match {
-              case s if s.startsWith("(") => {
+              case s if s.matches("\\((.*?)\\)") && (i > 0) => {
                 val str = split_array(i).substring(1, split_array(i).length - 1)
                 str match {
                   case c if c.startsWith(RECTANGLE) => {
@@ -188,9 +191,13 @@ class Parser(_input: String, errors: CustomTextArea) {
                   }
                 }
               }
-              case s => {
+              case s if (i == 0) => {
                 //color
                 color = s
+              }
+              case _ =>{
+                errors.get_area().append("Error -> Incorrect syntax.\n")
+                break
               }
             }
           }
@@ -274,29 +281,17 @@ class Parser(_input: String, errors: CustomTextArea) {
   }
 
   def check_syntax(stripped_s: String, check_what: String): Boolean = {
-    var a: Boolean = stripped_s(1) == '(' || stripped_s(5) == ')'
-    if (check_what == RECTANGLE || check_what == BOUNDING_BOX || check_what == LINE) {
-      var b: Boolean = stripped_s(7) == '(' || stripped_s(11) == ')'
-      if (!a) {
-        errors.get_area().append("Error, (  or ) missing in the first point!\n")
-      }
-      if (!b) {
-        errors.get_area().append("Error, (  or ) missing in the second point!\n")
-      }
-      return a && b
-    }
-
-    if (check_what == CIRCLE || check_what == TEXT) {
-      return a
-    }
-    return false
+    var pattern = " \\((\\d+) (\\d+)\\) \\((\\d+) (\\d+)\\)"
+    return stripped_s.matches(pattern)
   }
 
-  def getColorByName(name: String): Color = try classOf[Color].getField(name.toUpperCase).get(null).asInstanceOf[Color]
-  catch {
-    case e@(_: IllegalArgumentException | _: IllegalAccessException | _: NoSuchFieldException | _: SecurityException) =>
-      e.printStackTrace()
-      null
+  def getColorByName(name: String): Color = {
+    try classOf[Color].getField(name.toUpperCase).get(null).asInstanceOf[Color]
+    catch {
+      case e@(_: IllegalArgumentException | _: IllegalAccessException | _: NoSuchFieldException | _: SecurityException) =>
+        errors.get_area().append("Incorrect color. \n")
+        null
+    }
   }
 
 }
