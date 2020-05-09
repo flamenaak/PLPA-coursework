@@ -15,7 +15,7 @@ class Parser(_input: String, errors: CustomTextArea) {
   val CIRCLE = "CIRCLE"
   val LINE = "LINE"
   val RECTANGLE = "RECTANGLE"
-  val TEXT = "TEXT"
+  val TEXT = "TEXT-AT"
   val DRAW = "DRAW"
   val FILL = "FILL"
   val input = _input
@@ -103,7 +103,6 @@ class Parser(_input: String, errors: CustomTextArea) {
     }
     return true
   }
-
 
   def parse_fill_draw(line: String, what: String): List[Command] = {
     // strip outer parentheses
@@ -276,12 +275,16 @@ class Parser(_input: String, errors: CustomTextArea) {
     var parsed_args = ("""\d+""".r findAllIn stripped_s).toList.flatMap(_.toString.toIntOption)
     var x = parsed_args(0)
     var y = parsed_args(1)
-    var text = stripped_s.split("\"")(1)
+    var text = stripped_s.split("'")(1)
     return new Text(new Point(x, y), text)
   }
 
   def check_syntax(stripped_s: String, check_what: String): Boolean = {
-    var pattern = " \\((\\d+) (\\d+)\\) \\((\\d+) (\\d+)\\)"
+    if(check_what.equals(RECTANGLE) || check_what.equals(LINE) || check_what.equals(BOUNDING_BOX)){
+      var pattern = " \\((\\d+) (\\d+)\\) \\((\\d+) (\\d+)\\)"
+      return stripped_s.matches(pattern)
+    }
+    var pattern = " \\((\\d+) (\\d+)\\) (.*?)"
     return stripped_s.matches(pattern)
   }
 

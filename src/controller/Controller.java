@@ -34,12 +34,18 @@ public class Controller {
                         _parser = new Parser(_gui.getInputTextArea().get_area().getText(), _gui.getErrorTextArea());
                         Command[] parsed = _parser.parse();
                         BoundingBox _bbox = getBBox(parsed);
-                        if (hasMoreThanOneBBox(parsed)) {
-                            _gui.getErrorTextArea().get_area().append("You cannot have more than 1 Bounding-Box.\n");
-                        } else {
-                            _gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray), _bbox));
-                            _gui.repaintCanvas();
+                        if(_bbox != null){
+                            if (hasMoreThanOneBBox(parsed)) {
+                                _gui.getErrorTextArea().get_area().append("You cannot have more than 1 Bounding-Box.\n");
+                            } else {
+                                _gui.setEngine(new DrawingEngine(parsed, new Plane(20, Color.lightGray), _bbox));
+                                _gui.repaintCanvas();
+                            }
                         }
+                        else{
+                            _gui.getErrorTextArea().get_area().append("No bounding box specified.\n");
+                        }
+
                     } else {
                         _gui.getErrorTextArea().get_area().append("You are executing empty command.\n");
                     }
