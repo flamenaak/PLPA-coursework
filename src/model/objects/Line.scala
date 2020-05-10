@@ -13,31 +13,31 @@ case class Line(point1: Point, point2: Point, color: Color) extends Drawable(col
     val y0 = point1.y
     val y1 = point2.y
 
-    val dx = math.abs(x1 - x0)
-    val sx = if (x0 < x1) 1 else -1
-    val dy = math.abs(y1 - y0)
-    val sy = if (y0 < y1) 1 else -1
+    val distX = math.abs(x1 - x0)
+    val stepX = if (x0 < x1) 1 else -1
+    val distY = math.abs(y1 - y0)
+    val stepY = if (y0 < y1) 1 else -1
 
     def it = new Iterator[Tuple2[Int, Int]] {
       var x = x0;
       var y = y0
-      var err = (if (dx > dy) dx else -dy) / 2
+      var err = (if (distX > distY) distX else -distY) / 2
 
       def next: (Int, Int) = {
         val res = (x, y)
         val e2 = err;
-        if (e2 > -dx) {
-          err -= dy;
-          x += sx
+        if (e2 > -distX) {
+          err -= distY;
+          x += stepX
         }
-        if (e2 < dy) {
-          err += dx;
-          y += sy
+        if (e2 < distY) {
+          err += distX;
+          y += stepY
         }
         res;
       }
 
-      def hasNext = (sx * x <= sx * x1 && sy * y <= sy * y1)
+      def hasNext = (stepX * x <= stepX * x1 && stepY * y <= stepY * y1)
     }
 
     for ((x, y) <- it) {
